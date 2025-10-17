@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from backend.apis.health_route import router as health_router
+from backend.apis.weather_route import router as weather_router
 from backend.constant_manager import ProjectDirectories
 
 
@@ -20,6 +21,7 @@ templates = Jinja2Templates(directory=str(ProjectDirectories.TEMPLATE_DIR))
  # Mount static files directory (CSS, JS, assets)
 app.mount("/static", StaticFiles(directory=ProjectDirectories.STATIC_DIR), name="static")
 app.include_router(health_router, prefix="/api")
+app.include_router(weather_router, prefix="/api")
 
 @app.get("/", include_in_schema=False)
 async def index(request: Request):
