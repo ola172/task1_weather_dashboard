@@ -1,26 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ request.app.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌤️ Weather Dashboard</title>
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
+
 <body>
-    <header class="header">
-        <h1>Weather Dashboard</h1>
-    </header>
+  <!-- Header -->
+  <header class="main-header">
+    <h1>🌤️ Weather Dashboard</h1>
+    <p>Check current weather details by city name</p>
+  </header>
 
-    <main class="main-content">
-        <section id="weather-card" class="weather-card">
-            <p class="placeholder-text">Weather data will appear here.</p>
-        </section>
-    </main>
+  <!-- Main Content -->
+  <main>
+    <div class="weather-container">
+      <div id="loading" class="loading hidden">Loading weather data...</div>
+      <div id="error" class="error hidden"></div>
 
-    <footer class="footer">
-        <p>© 2025 Weather Dashboard | FastAPI + Jinja2</p>
-    </footer>
+      <div class="input-section">
+        <input type="text" id="cityInput" placeholder="Enter city name..." class="city-input" />
+        <button onclick="">Search</button>
+      </div>
 
-    <script src="{{ url_for('static', path='js/main.js') }}"></script>
+      <div id="weatherCard" class="weather-card hidden">
+
+        <!-- Row 1: General Info -->
+        <div class="row">
+          <section class="weather-section general">
+            <div class="section-header">General Info</div>
+            <div class="section-body">
+              <img id="icon" alt="Weather icon" class="weather-icon" />
+              <div>
+                <div class="weather-location" id="location">--</div>
+                <div class="weather-status">
+                  <span id="status">--</span> - <span id="description">--</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Row 2: Temperature + Wind -->
+        <div class="row">
+          <section class="weather-section temperature">
+            <div class="section-header">🌡️ Temperature</div>
+            <div class="section-body">
+              <div><strong>Current:</strong> <span id="temp">--</span> °C</div>
+              <div><strong>Feels Like:</strong> <span id="feels_like">--</span> °C</div>
+              <div><strong>Min:</strong> <span id="temp_min">--</span> °C</div>
+              <div><strong>Max:</strong> <span id="temp_max">--</span> °C</div>
+              <div><strong>Humidity:</strong> <span id="humidity">--</span>%</div>
+              <div><strong>Pressure:</strong> <span id="pressure">--</span> hPa</div>
+            </div>
+          </section>
+
+          <section class="weather-section wind">
+            <div class="section-header">💨 Wind</div>
+            <div class="section-body">
+              <div><strong>Speed:</strong> <span id="wind_speed">--</span> m/s</div>
+              <div><strong>Direction:</strong> <span id="wind_direction">--</span>°</div>
+              <div><strong>Gust:</strong> <span id="wind_gust">--</span> m/s</div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Row 3: Clouds + Sunrise/Sunset -->
+        <div class="row">
+          <section class="weather-section clouds">
+            <div class="section-header">☁️ Clouds</div>
+            <div class="section-body">
+              <div><strong>Cloudiness:</strong> <span id="clouds_percentage">--</span>%</div>
+              <div><strong>Visibility:</strong> <span id="visibility">--</span> m</div>
+            </div>
+          </section>
+
+          <section class="weather-section sun">
+            <div class="section-header">🌅 Sunrise & 🌇 Sunset</div>
+            <div class="section-body">
+              <div><strong>Sunrise:</strong> <span id="sunrise">--</span></div>
+              <div><strong>Sunset:</strong> <span id="sunset">--</span></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="weather-footer">
+          <span id="lastUpdated">Last updated: --</span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>Powered by OpenWeatherMap API | © 2025 Weather Dashboard</p>
+  </footer>
+
+  <!-- Script -->
+  <script src="/static/js/weather.js"></script>
 </body>
+
 </html>
