@@ -56,7 +56,7 @@ templates/
 
 2. Create a virtual environment using pip:
     ```bash
-    python3.13 -m venv venv
+    python3.13 -m venv .venv
     ```
     Or using uv:
     ```bash
@@ -66,7 +66,7 @@ templates/
 3. Activate the virtual environment:
     - Linux / macOS:
         ```bash
-        source venv/bin/activate
+        source .venv/bin/activate
         ```
     - Windows (CMD):
         ```bash
@@ -81,12 +81,14 @@ templates/
     ```bash
     pip install -r requirements.txt
     ```
-5. Run the server
+5. Set environment variable:
+
+6. Run the server
     ```bash
     uvicorn backend.main:app --reload --port 7000
     ```
 
-6. Open your browser to view the dashboard:
+7. Open your browser to view the dashboard:
     - Frontend: http://http://127.0.0.1:7000/
     - Swagger API documentation: http://http://127.0.0.1:7000/api/docs#/
 
