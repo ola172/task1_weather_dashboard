@@ -89,8 +89,8 @@ templates/
     ```
 
 7. Open your browser to view the dashboard:
-    - Frontend: http://http://127.0.0.1:7000/
-    - Swagger API documentation: http://http://127.0.0.1:7000/api/docs#/
+    - Frontend: http://127.0.0.1:7000/
+    - Swagger API documentation: http://127.0.0.1:7000/api/docs#/
 
 ---
 ## Usage
