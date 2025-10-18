@@ -13,6 +13,8 @@ The Weather Dashboard Website is a responsive, user-friendly web application tha
 - [Configuration / Environment Variables](#configuration--environment-variables)
 - [Screenshots / Demo](#screenshots--demo)
 - [Technologies Used](#technologies-used)
+- [GitHub repository](#github-repository)
+
 
 ---
 
@@ -189,3 +191,11 @@ All environment variables are configured in config.py or a .env.example file:
     - Structured logging
 
     - GIT for repository management
+
+---
+
+## GitHub repository
+
+- Github repo link: https://github.com/ola172/task1_weather_dashboard.git
+
+---
