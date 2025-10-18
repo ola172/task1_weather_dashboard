@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from backend.exceptions import CustomException
+from backend.core.exceptions import CustomException
 from backend.models.weather import (
     WeatherCityRequest,
     WeatherCoordsRequest,
@@ -18,7 +18,6 @@ weather_service = WeatherService(api_key=settings.WEATHER_API_KEY)
 @router.post(
     "/weather/coords",
     response_model=WeatherResponse,
-    responses={400: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
     tags=["Weather"],
 )
 async def get_weather(
@@ -50,13 +49,12 @@ async def get_weather(
     except CustomException as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message)
     except Exception as exc:
-        raise HTTPException(status_code='500', detail="Failed to fetch weather data.")
+        raise HTTPException(status_code="500", detail="Failed to fetch weather data.")
 
 
 @router.post(
     "/weather/city",
     response_model=WeatherResponse,
-    responses={400: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
     tags=["Weather"],
 )
 async def get_weather(
@@ -85,4 +83,4 @@ async def get_weather(
     except CustomException as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message)
     except Exception as exc:
-        raise HTTPException(status_code='500', detail="Failed to fetch weather data.")
+        raise HTTPException(status_code="500", detail="Failed to fetch weather data.")

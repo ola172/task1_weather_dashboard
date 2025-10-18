@@ -13,6 +13,7 @@ def ttl_cache(ttl_seconds: int = 60):
     Returns:
         Callable: Decorator function.
     """
+
     def decorator(func):
         @wraps(func)
         async def wrapper(*args, **kwargs):
@@ -26,5 +27,7 @@ def ttl_cache(ttl_seconds: int = 60):
             result = await func(*args, **kwargs)
             _cache_store[key] = (result, now + ttl_seconds)
             return result
+
         return wrapper
+
     return decorator

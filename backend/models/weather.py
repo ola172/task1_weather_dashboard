@@ -8,27 +8,19 @@ class WeatherCoordsRequest(BaseModel):
 
     lat: float = Field(None, description="Latitude")
     lon: float = Field(None, description="Longitude")
-    units: Literal['metric', 'imperial'] = Field("metric", description="Units: metric or imperial")
+    units: Literal["metric", "imperial"] = Field(
+        "metric", description="Units: metric or imperial"
+    )
 
-    @field_validator("units")
-    def validate_units(cls, v):
-        if v not in {"metric", "imperial"}:
-            raise ValueError("Units must be 'metric' or 'imperial'")
-        return v
-    
 
 class WeatherCityRequest(BaseModel):
     """Request model for weather API."""
 
     city: Optional[str] = Field(None, description="City name (fallback)")
-    units: Literal['metric', 'imperial'] = Field("metric", description="Units: metric or imperial")
-
-    @field_validator("units")
-    def validate_units(cls, v):
-        if v not in {"metric", "imperial"}:
-            raise ValueError("Units must be 'metric' or 'imperial'")
-        return v
-
+    units: Literal["metric", "imperial"] = Field(
+        "metric", description="Units: metric or imperial"
+    )
+    
     @field_validator("city")
     def strip_city(cls, v):
         return v.strip() if v else v

@@ -4,7 +4,7 @@ from backend.models.weather import WeatherResponse
 from backend.core.config import settings
 from backend.core.cache import ttl_cache
 from backend.core.logger import get_logger
-from backend.exceptions import WeatherServiceException
+from backend.core.exceptions import WeatherServiceException
 
 logger = get_logger(__name__)
 
@@ -24,7 +24,11 @@ class WeatherService:
 
     @ttl_cache(ttl_seconds=90)
     async def get_weather(
-        self, lat: float = None, lon: float = None, city: str = None, units: str = "metric"
+        self,
+        lat: float = None,
+        lon: float = None,
+        city: str = None,
+        units: str = "metric",
     ) -> WeatherResponse:
         """Fetch and normalize current weather data.
 
@@ -89,11 +93,18 @@ class WeatherService:
                 return weather
 
         except httpx.HTTPStatusError as exc:
-            logger.error(f"Provider returned {exc.response.status_code}: {exc.response.text}")
+            logger.error(
+                f"Provider returned {exc.response.status_code}: {exc.response.text}"
+            )
             raise WeatherServiceException(
                 status_code=exc.response.status_code,
-                message=exc.response.json().get("message", "Error fetching weather data.") ,
-                additional_info={"status_code": exc.response.status_code, "response": exc.response.text},
+                message=exc.response.json().get(
+                    "message", "Error fetching weather data."
+                ),
+                additional_info={
+                    "status_code": exc.response.status_code,
+                    "response": exc.response.text,
+                },
             )
         except httpx.RequestError as exc:
             logger.error(f"Network error during weather fetch: {exc}")
